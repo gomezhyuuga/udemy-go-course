@@ -18,6 +18,8 @@ func main() {
 	fmt.Println("to string:")
 	fmt.Println(cards.toString())
 
+	cards.saveToFile("mycards.txt")
+
 }
 
 func newCard() string {
