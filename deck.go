@@ -2,8 +2,10 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
 	"os"
 	"strings"
+	"time"
 )
 
 // create new type of deck
@@ -11,24 +13,23 @@ type deck []string
 
 func (d deck) print() {
 	for i, card := range d {
-		fmt.Println(i, card)
+		fmt.Println(fmt.Sprintf("[%d]", i+1), card)
 	}
-}
-
-func (d deck) shuffle() deck {
-	return d
 }
 
 func newDeck() deck {
 	cards := deck{}
 
-	cardSuits := []string{"Spades", "Hearts", "Diamonds", "Clubs"}
+	cardSuits := []string{"♠️", "♥️", "♦️", "♣️"}
 
-	cardValues := []string{"Ace", "Two", "Three", "Four"}
+	cardValues := []string{"1"}
+	for i := 1; i <= 12; i++ {
+		cardValues = append(cardValues, fmt.Sprint(i))
+	}
 
 	for _, suit := range cardSuits {
 		for _, value := range cardValues {
-			cards = append(cards, value+" of "+suit)
+			cards = append(cards, fmt.Sprintf("%s %s", suit, value))
 
 		}
 	}
@@ -59,4 +60,14 @@ func newDeckFromFile(filename string) deck {
 	cards := strings.Split(string(bs), ",")
 
 	return deck(cards)
+}
+
+func (d deck) shuffle() {
+	source := rand.NewSource(time.Now().UnixNano())
+	r := rand.New(source)
+
+	for i := range d {
+		newPosition := r.Intn(len(d) - 1)
+		d[i], d[newPosition] = d[newPosition], d[i]
+	}
 }
