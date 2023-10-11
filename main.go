@@ -20,6 +20,9 @@ func main() {
 
 	cards.saveToFile("mycards.txt")
 
+	fmt.Println("Reading from file...")
+	newCards := newDeckFromFile("mycards.txt")
+	newCards.print()
 }
 
 func newCard() string {
