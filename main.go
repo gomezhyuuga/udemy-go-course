@@ -15,6 +15,9 @@ func main() {
 	fmt.Println(">>> Remain")
 	remainingDeck.print()
 
+	fmt.Println("to string:")
+	fmt.Println(cards.toString())
+
 }
 
 func newCard() string {

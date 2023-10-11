@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 // create new type of deck
 type deck []string
@@ -34,4 +37,8 @@ func newDeck() deck {
 
 func deal(cards deck, handSize int) (deck, deck) {
 	return cards[:handSize], cards[handSize:]
+}
+
+func (d deck) toString() string {
+	return strings.Join(d, ",")
 }
