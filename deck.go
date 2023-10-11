@@ -31,3 +31,7 @@ func newDeck() deck {
 
 	return cards
 }
+
+func deal(cards deck, handSize int) (deck, deck) {
+	return cards[:handSize], cards[handSize:]
+}
